@@ -1,0 +1,88 @@
+// Link to source
+/// @link https://www.oddbird.net/accoutrement/docs/color.html
+
+// *** Color palette *** //
+
+$colors: (
+  // Set explicit colors
+  'blue': #007bff,
+  'indigo': #6610f2,
+  'purple': #6f42c1,
+  'pink': #e83e8c,
+  'red': #dc3545,
+  'orange': #fd7e14,
+  'yellow': #ffc107,
+  'green': #28a745,
+  'teal': #20c997,
+  'cyan': #17a2b8,
+  'white': #fff,
+  'gray': #6c757d,
+  'gray-dark': #343a40,
+  'primary': #007bff,
+  'secondary': #6c757d,
+  'success': #28a745,
+  'info': #17a2b8,
+  'warning': #ffc107,
+  'danger': #dc3545,
+  'light': #f8f9fa,
+  'dark': #343a40,
+
+  'sand': #f7f4ee,
+
+  //Lighter
+  'light-grey':#F7F7F7,
+  'light-blue':#F2F9FD,
+  'white-smoke': #eaeaea,
+
+  //Darker
+  'dark-grey':#555,
+  'vivid-blue':#2B9DD6,
+  'alice-blue':#ecf3f6,
+);
+
+// Use color names that define the purpose of the color.
+// Example: primary or highlight or light-background
+$primary-colors: (
+  'primary': '#blue',
+  'primary-100': '#vivid-blue',
+  'primary-300': '#alice-blue',
+);
+
+$secondary-colors: (
+  'secondary': '#white',
+  'secondary-100': '#light-blue',
+  'secondary-200': '#dark-blue',
+  'secondary-300': '#white-smoke',
+);
+
+$text-colors: (
+  'text': '#dark-grey',
+  'link': '#vivid-blue',
+  'link-hover': '#vivid-blue',
+  'error': '#red',
+);
+
+$button-colors: (
+  'button-primary': '#dark-grey',
+  'button-primary-hover': '#white',
+  'button-secondary': '#white',
+  'button-secondary-hover': '#dark-grey',
+  'button-cta': '#white',
+  'button-cta-hover': '#white',
+  'button-disable': '#grey'
+);
+
+// Merge everything into the main $colors map…
+@include add-colors(
+  $colors,
+  $primary-colors,
+  $secondary-colors,
+  $text-colors,
+  $button-colors
+);
+
+// Example of usage
+// .example {
+//   color: color('grey');
+//   background-color: color('light-grey');
+// }

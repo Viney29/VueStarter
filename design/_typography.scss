@@ -1,0 +1,228 @@
+/// @access private
+/// @link https://www.oddbird.net/accoutrement/docs/type.html
+
+/// Defined fonts
+$fonts: (
+  'sans': (
+    'name': 'Lato',
+    'formats': 'woff2',
+    'stack': (
+      'Arial',
+      sans-serif,
+    ),
+    'normal':
+      'https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap',
+  ),
+  'serif': (
+    'name': 'Montserrat',
+    'formats': 'woff2',
+    'stack': (
+      'Arial',
+      sans-serif,
+    ),
+    'normal':
+      'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap',
+  ),
+  'primary': '#sans',
+  'secondary': '#serif',
+);
+
+$typography: (
+  'body': (
+    'font': '#primary',
+    'size': rem(16px),
+    // 1rem
+    'height': 1,
+    'weight': normal,
+    'spacing': 0.5px,
+  ),
+  'heading-1a': (
+    'font': '#secondary',
+    'size': rem(48px),
+    'height': rem(64px),
+    'weight': 400,
+    'spacing': -1px,
+  ),
+  'heading-1b': (
+    'font': '#secondary',
+    'size': rem(42px),
+    'height': rem(56px),
+    'weight': 400,
+    'spacing': -1px,
+  ),
+  'heading-1': (
+    'font': '#secondary',
+    'size': rem(40px),
+    // 2.5rem
+    'height': rem(56px),
+    'weight': 400,
+    'spacing': -1px,
+  ),
+  'heading-2a': (
+    'font': '#secondary',
+    'size': rem(30px),
+    'height': rem(40px),
+    'weight': 400,
+    'spacing': -1px,
+  ),
+  'heading-2b': (
+    'font': '#secondary',
+    'size': rem(36px),
+    'height': rem(48px),
+    'weight': 400,
+    'spacing': -1px,
+  ),
+  'heading-2': (
+    'font': '#secondary',
+    'size': rem(32px),
+    //	2rem
+    'height': rem(48px),
+    'weight': 400,
+    'spacing': -1px,
+  ),
+  'heading-3': (
+    'font': '#secondary',
+    'size': rem(24px),
+    // 1.5rem
+    'height': rem(40px),
+    'weight': 400,
+    'spacing': -0.5px,
+  ),
+  'heading-4a': (
+    'font': '#secondary',
+    'size': rem(20px),
+    'height': rem(32px),
+    'weight': 600,
+    'spacing': 0,
+  ),
+  'heading-4': (
+    'font': '#secondary',
+    'size': rem(20px),
+    // 1.25rem
+    'height': rem(32px),
+    'weight': 400,
+    'spacing': -0.5px,
+  ),
+  'heading-5': (
+    'font': '#secondary',
+    'size': rem(16px),
+    // 1rem
+    'height': rem(24px),
+    'weight': 400,
+    'spacing': 0px,
+  ),
+  'heading-6': (
+    'font': '#secondary',
+    'size': rem(14px),
+    // 0.875rem
+    'height': rem(24px),
+    'weight': 400,
+    'spacing': 0px,
+  ),
+  'subtitle': (
+    'font': '#secondary',
+    'size': rem(16px),
+    'height': rem(24px),
+    'weight': 600,
+    'spacing': 0,
+  ),
+  'paragraph': (
+    'font': '#primary',
+    'size': rem(16px),
+    // 1rem
+    'height': rem(24px),
+    'weight': 400,
+    'spacing': 0,
+  ),
+  'copy': (
+    'font': '#primary',
+    'size': rem(14px),
+    // 0.875rem
+    'height': rem(24px),
+    'weight': 400,
+    'spacing': 0,
+  ),
+  'copy-small': (
+    'font': '#primary',
+    'size': rem(12px),
+    // 0.75rem
+    'height': rem(16px),
+    'weight': 400,
+    'spacing': 0,
+  ),
+  'text': '#paragraph',
+  // 1rem
+  'button':
+    (
+      'font': '#secondary',
+      'size': rem(14px),
+      // 0.875rem
+      'height': rem(16px),
+      'weight': 600,
+      'spacing': 0.2px,
+    ),
+  'select': '#button',
+  'navigation': (
+    'font': '#secondary',
+    'size': rem(12px),
+    // 0.75rem
+    'height': rem(16px),
+    'weight': 700,
+    'spacing': 0.2px,
+  ),
+  'desc': (
+    'font': '#primary',
+    'size': rem(12px),
+    'height': rem(16px),
+    'weight': 400,
+    'spacing': 0,
+  ),
+  'label': (
+    'font': '#secondary',
+    'size': rem(11px),
+    // 0.6875rem
+    'height': rem(11px),
+    'weight': 600,
+    'spacing': 0.2px,
+  ),
+  'small': (
+    'font': '#secondary',
+    'size': rem(10px),
+    'height': rem(12px),
+    'weight': 600,
+    'spacing': 0.2px,
+  ),
+);
+
+/// Set text style.
+/// @param {string} $token - One of keys of $typography map above.
+
+@function var-font-family($token, $fallback: false) {
+  @if ($can-use-css-variables) {
+    @return var-font($font: $token, $fallback: $fallback);
+  } @else {
+    @return font-family($token);
+  }
+}
+
+/// Set text style.
+/// @param {string} $token - One of keys of $typography map above.
+@mixin use-text-style($token: 'paragraph') {
+  $type: get-token($typography, $token);
+
+  font-family: var-font-family(get-token($type, 'font'));
+  font-size: get-token($type, 'size');
+  font-weight: get-token($type, 'weight');
+  line-height: get-token($type, 'height');
+  letter-spacing: get-token($type, 'spacing');
+}
+
+///  text style update- only font size and line height
+/// @param {string} $token - One of keys of $typography map above.
+@mixin update-text-style($token: 'body') {
+  $type: get-token($typography, $token);
+
+  font-size: get-token($type, 'size');
+  line-height: get-token($type, 'height');
+  letter-spacing: get-token($type, 'spacing');
+}
